@@ -1,4 +1,4 @@
-package pipe;
+package com.components.pipe;
 
 import java.io.IOException;
 import java.io.PipedReader;
@@ -13,24 +13,22 @@ public class Pipe {
         this.reader = new PipedReader();
         this.writer = new PipedWriter();
         this.writer.connect(this.reader);
-
-
     }
 
 
     public ArrayList<String> Read() throws IOException {
         ArrayList<String> al = new ArrayList<>();
-        int c = 0;
+
         ArrayList<Character> temp = new ArrayList<>();
         do {
-            c = this.reader.read();
-            if (c > 0) {
+            int c = this.reader.read();
+            if (c != 32) {
                 temp.add(Character.valueOf((char) c));
             } else if (temp.size() > 0) {
                 al.add(temp.toString());
                 temp = new ArrayList<>();
             }
-        } while (c >= 0);
+        } while (this.reader.ready());
         return al;
     }
 
@@ -53,8 +51,9 @@ public class Pipe {
     public void print() throws IOException {
         int i = 0;
         do {
-            System.out.write(this.reader.read());
-        } while (i >= 0);
+            // TODO: fix printing garbage
+            System.out.print((char) this.reader.read());
+        } while (this.reader.ready());
     }
 
 }

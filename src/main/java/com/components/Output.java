@@ -1,6 +1,6 @@
-package components;
+package com.components;
 
-import pipe.Pipe;
+import com.components.pipe.Pipe;
 
 import java.io.IOException;
 
