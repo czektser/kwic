@@ -18,13 +18,12 @@ public class Pipe {
     }
 
 
-
     public ArrayList<String> Read() throws IOException {
         ArrayList<String> al = new ArrayList<>();
         int c = 0;
         ArrayList<Character> temp = new ArrayList<>();
         do {
-            c =this.reader.read();
+            c = this.reader.read();
             if (c > 0) {
                 temp.add(Character.valueOf((char) c));
             } else if (temp.size() > 0) {
@@ -45,17 +44,17 @@ public class Pipe {
         }
     }
 
-    public void write(byte[] b) throws IOException{
-        for (int i=0;i<b.length;i++){
+    public void write(byte[] b) throws IOException {
+        for (int i = 0; i < b.length; i++) {
             this.writer.write(b[i]);
         }
     }
 
     public void print() throws IOException {
-        int i=0;
-        do{
-           System.out.write(this.reader.read());
-        } while (i>=0);
+        int i = 0;
+        do {
+            System.out.write(this.reader.read());
+        } while (i >= 0);
     }
 
 }

@@ -13,10 +13,11 @@ public class Input implements Runnable {
         this.stream = stream;
         this.pipe = pipe;
     }
+
     public void run() {
         try {
             this.pipe.write(this.stream.readAllBytes());
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }

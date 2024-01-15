@@ -5,7 +5,8 @@ import pipe.Pipe;
 import java.io.IOException;
 
 public class Output implements Runnable {
-   private Pipe out;
+    private Pipe out;
+
     public Output(Pipe out) {
         this.out = out;
     }
@@ -14,7 +15,7 @@ public class Output implements Runnable {
     public void run() {
         try {
             this.out.print();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
