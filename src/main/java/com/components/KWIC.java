@@ -16,11 +16,11 @@ public class KWIC {
             FileInputStream in = new FileInputStream(file);
             Input input = new Input(in, inCS);
             CircularShifter shifter = new CircularShifter(inCS, csAl);
-            Alphabetizer alpha = new Alphabetizer(inCS, alOut);
+            Alphabetizer alpha = new Alphabetizer(csAl, alOut);
             Output output = new Output(alOut);
 
             input.run();
-      //      shifter.run();
+            shifter.run();
             alpha.run();
             output.run();
         } catch (FileNotFoundException e) {

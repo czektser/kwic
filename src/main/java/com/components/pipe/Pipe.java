@@ -18,17 +18,20 @@ public class Pipe {
 
     public ArrayList<String> Read() throws IOException {
         ArrayList<String> al = new ArrayList<>();
-
-        ArrayList<Character> temp = new ArrayList<>();
+        StringBuffer sb = new StringBuffer();
         do {
             int c = this.reader.read();
-            if (c != 32) {
-                temp.add(Character.valueOf((char) c));
-            } else if (temp.size() > 0) {
-                al.add(temp.toString());
-                temp = new ArrayList<>();
+            if (c != 13 && c != 10) { // everything except new line and carriage return
+                sb.append((char) c);
+            } else if (!sb.isEmpty()) {
+                al.add(sb.toString());
+                sb.delete(0, sb.length());
             }
         } while (this.reader.ready());
+
+        if (al.size() == 0 && !sb.isEmpty()) {
+            al.add(sb.toString());
+        }
         return al;
     }
 
@@ -38,7 +41,7 @@ public class Pipe {
 
     public void write(ArrayList<String> w) throws IOException {
         for (int i = 0; i < w.size(); i++) {
-            this.writer.write(w.get(i));
+            this.writer.write(w.get(i) + "\n");
         }
     }
 
@@ -49,9 +52,10 @@ public class Pipe {
     }
 
     public void print() throws IOException {
-        int i = 0;
         do {
             // TODO: fix printing garbage
+            //  int i = this.reader.read()
+            //         if (i!= 13  && i != 10)
             System.out.print((char) this.reader.read());
         } while (this.reader.ready());
     }
