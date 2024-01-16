@@ -30,7 +30,7 @@ public class Pipe {
             }
         } while (this.reader.ready());
 
-        if (al.size() == 0 && !sb.isEmpty()) {
+        if (!sb.isEmpty()) {
             al.add(sb.toString());
         }
         return al;

@@ -17,7 +17,6 @@ public class CircularShifter implements Runnable {
     public void run() {
         try {
             ArrayList<String> r = in.Read();
-            ArrayList<String> lines = new ArrayList<>();
             for (int i = 0; i < r.size(); i++) {
                 String line = r.get(i);
                 String[] words = line.split("\\s+");  //split on  space
