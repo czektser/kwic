@@ -24,6 +24,7 @@ public class Pipe {
             if (c != 13 && c != 10) { // everything except new line and carriage return
                 sb.append((char) c);
             } else if (!sb.isEmpty()) {
+                sb.append((char) c);
                 al.add(sb.toString());
                 sb.delete(0, sb.length());
             }
@@ -40,9 +41,16 @@ public class Pipe {
     }
 
     public void write(ArrayList<String> w) throws IOException {
+        StringBuffer sb = new StringBuffer();
         for (int i = 0; i < w.size(); i++) {
-            this.writer.write(w.get(i) + "\n");
+            sb.append(w.get(i));
+            if (i == w.size() - 1) {
+                sb.append("\n");
+            } else {
+                sb.append(" ");
+            }
         }
+        this.write(sb.toString());
     }
 
     public void write(byte[] b) throws IOException {
@@ -52,11 +60,17 @@ public class Pipe {
     }
 
     public void print() throws IOException {
+        StringBuffer sb = new StringBuffer();
         do {
-            // TODO: fix printing garbage
-            //  int i = this.reader.read()
-            //         if (i!= 13  && i != 10)
-            System.out.print((char) this.reader.read());
+
+            int i = this.reader.read();
+            if (i != 13 && i != 10) {
+                sb.append((char) i);
+            } else {
+                System.out.println(sb.toString().trim());
+                sb.delete(0, sb.length());
+            }
+
         } while (this.reader.ready());
     }
 
